@@ -85,37 +85,41 @@ const jobs = [
     },
   ]
   
-  function cercaLavori(title,location) {
-  let results = []
-  let count = 0
-    
-    for(i = 0; i < jobs.length; i++ ){
-      const findJob = jobs[i]
-      
-      if (findJob.title.toLowerCase().includes(title) && findJob.location.toLowerCase().includes(location)) {
-   
-    results.push (findJob)
-    count ++                                                                             }
-    } return {results, count}
-
-  } 
-  console.log(cercaLavori(results,count))
+function cercaLavori (title,location) {
   
+result : []
+count : 0
 
-function ricercaRisultati() {
-  let titleValue = document.querySelector("input#title").value
-  let locationValue= document.querySelector("input#location").value
-  let lista = document.getElementsByTagName("ul")
+  for (let i = 0; i < jobs.length; i++) {
+    const job = jobs[i]
+    
+    if (job.title.toLowerCase().includes(title) && job.location.toLowerCase().includes(location)) {
 
-  const risultati = cercaLavori(titleValue, locationValue)
-  for(let i = 0; i < risultati.results.length; i++) {
-    const lavori = risultati.results[i]
+      risultati.result.push(job)
+      risultati.count += 1
+    }
+  } return risultati
+
+}
+console.log(cercaLavori("Account", "US"))
+
+
+function mostraRisultati() {
+  
+let titleValue = document.querySelector("input#title").value
+let locationValue = document.querySelector("input#location").value
+let lista = document.getElementById("listaLavori")
+const lavoriDisponibili = cercaLavori(titleValue, locationValue)
+
+  for (let i = 0; i < lavoriDisponibili.result.length; i++) {
+ const lavoro = lavoriDisponibili.result[i];
+    
     let nuovoElemento = document.createElement("li")
-    nuovoElemento.textContent = lavori.title + "," + lavori.location;
-    lista.appendChild(nuovoElemento)
-    console.log(nuovoElemento)
+    nuovoElemento.innerText = lavori.title + "," + lavori.location;
+    document.getElementById("listaLavori").appendChild(nuovoElemento)
+    //console.log(nuovoElemento)
   }
-console.log(ricercaRisultati)
+ 
 }
 
 
